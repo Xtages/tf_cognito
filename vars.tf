@@ -11,3 +11,7 @@ variable "region" {}
 variable "account_id" {
   description = "AWS account ID"
 }
+
+variable "domain_name" {
+  description = "Name of the domain that will send the emails"
+}
