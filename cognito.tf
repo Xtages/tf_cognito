@@ -27,7 +27,7 @@ resource "aws_cognito_user_pool" "user_pool" {
 
   email_configuration {
     email_sending_account = "DEVELOPER"
-    from_email_address    = "Xtages Accounts <no-reply@xtages.com>"
+    from_email_address    = "Xtages Accounts <no-reply@${var.domain_name}>"
     source_arn            = var.no_reply_at_xtages_dot_com_arn
   }
 
