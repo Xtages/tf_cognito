@@ -32,6 +32,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_account_id"></a> [account\_id](#input\_account\_id) | AWS account ID | `any` | n/a | yes |
+| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Name of the domain that will send the emails | `any` | n/a | yes |
 | <a name="input_env"></a> [env](#input\_env) | Cloud environment where the resources are allocated e.g. Production, Development, etc | `any` | n/a | yes |
 | <a name="input_no_reply_at_xtages_dot_com_arn"></a> [no\_reply\_at\_xtages\_dot\_com\_arn](#input\_no\_reply\_at\_xtages\_dot\_com\_arn) | SES ARN to no-reply@xtages.com | `any` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | n/a | `any` | n/a | yes |
