@@ -11,7 +11,7 @@ resource "aws_cognito_user_pool" "user_pool" {
   admin_create_user_config {
     invite_message_template {
       email_message = data.template_file.invite_template.rendered
-      email_subject = "Invitation to join Xtages"
+      email_subject = "You've been invited to join Xtages"
       sms_message   = "Your username is {username} and temporary password is {####}"
     }
   }
