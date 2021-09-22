@@ -74,7 +74,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     developer_only_attribute = false
     mutable                  = true
     name                     = "name"
-    required                 = true
+    required                 = false
     string_attribute_constraints {
       max_length = "2048"
       min_length = "0"
