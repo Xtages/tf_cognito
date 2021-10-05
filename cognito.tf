@@ -45,11 +45,25 @@ resource "aws_cognito_user_pool" "user_pool" {
     temporary_password_validity_days = 7
   }
 
+  // Deprecated
+  // TODO(czuniga): Remove this attribute when we can do a migration to another user_pool.
   schema {
     attribute_data_type      = "String"
     developer_only_attribute = false
     mutable                  = false
     name                     = "organization"
+    required                 = false
+    string_attribute_constraints {
+      max_length = "256"
+      min_length = "1"
+    }
+  }
+
+  schema {
+    attribute_data_type      = "String"
+    developer_only_attribute = false
+    mutable                  = true
+    name                     = "organization-hash"
     required                 = false
     string_attribute_constraints {
       max_length = "256"
@@ -69,6 +83,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     }
   }
 
+  // TODO(czuniga): Make `name` not required when we can do a migration to another user_pool.
   schema {
     attribute_data_type      = "String"
     developer_only_attribute = false
@@ -161,7 +176,7 @@ aws cognito-identity set-principal-tag-attribute-map \
 --identity-pool-id ${aws_cognito_identity_pool.identity_pool.id} \
 --identity-provider-name ${aws_cognito_user_pool.user_pool.endpoint} \
 --no-use-defaults \
---principal-tags '{ "client": "aud", "username": "sub", "organization": "custom:organization"}' \
+--principal-tags '{ "client": "aud", "username": "sub", "organization": "custom:organization", "organization-hash": "custom:organization-hash"}' \
 --region ${var.region}
 EOT
   }
@@ -226,8 +241,8 @@ resource "aws_iam_role_policy" "authenticated_user_policy" {
       ],
       "Condition": {
         "StringEquals": {
-          "aws:ResourceTag/organization":
-          "$${aws:PrincipalTag/organization}"
+          "aws:ResourceTag/organization-hash":
+          "$${aws:PrincipalTag/organization-hash}"
         }
       }
     }
