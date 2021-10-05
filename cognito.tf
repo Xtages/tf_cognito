@@ -76,7 +76,6 @@ resource "aws_cognito_user_pool" "user_pool" {
     developer_only_attribute = false
     mutable                  = true
     name                     = "email"
-    // TODO(czuniga): Make `name` not required when we can do a migration to another user_pool.
     required                 = true
     string_attribute_constraints {
       max_length = "2048"
@@ -84,6 +83,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     }
   }
 
+  // TODO(czuniga): Make `name` not required when we can do a migration to another user_pool.
   schema {
     attribute_data_type      = "String"
     developer_only_attribute = false
